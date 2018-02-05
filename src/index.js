@@ -393,6 +393,7 @@ export default class extends Component {
    * @param  {string} dir    'x' || 'y'
    */
   updateIndex = (offset, dir, cb) => {
+    dir = dir || 'y'
     const state = this.state
     let index = state.index
     const diff = offset[dir] - this.internals.offset[dir]
