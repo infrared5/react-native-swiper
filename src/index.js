@@ -360,7 +360,6 @@ export default class extends Component {
       }
     }
 
-    console.log('updating', e.nativeEvent.contentOffset, this.state.dir)
     this.updateIndex(e.nativeEvent.contentOffset, this.state.dir, () => {
       this.autoplay()
       this.loopJump()
@@ -394,13 +393,14 @@ export default class extends Component {
    * @param  {string} dir    'x' || 'y'
    */
   updateIndex = (offset, dir, cb) => {
+    // fallbacks
     dir = dir || 'y'
-    console.log('dir', dir)
-    console.log('offset[dir]', offset[dir])
-    console.log('this.internals.offset[dir]', this.internals.offset[dir])
+    offset = offset || {}
+    this.internals = this.internals || {}
+    this.internals.offset = this.internals.offset || {}
     const state = this.state
     let index = state.index
-    const diff = offset[dir] - this.internals.offset[dir]
+    const diff = (offset[dir] || 0) - (this.internals.offset[dir] || 0)
     const step = dir === 'x' ? state.width : state.height
     let loopJump = false
 
