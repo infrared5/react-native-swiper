@@ -360,6 +360,7 @@ export default class extends Component {
       }
     }
 
+    console.log('updating', e.nativeEvent.contentOffset, this.state.dir)
     this.updateIndex(e.nativeEvent.contentOffset, this.state.dir, () => {
       this.autoplay()
       this.loopJump()
@@ -394,6 +395,9 @@ export default class extends Component {
    */
   updateIndex = (offset, dir, cb) => {
     dir = dir || 'y'
+    console.log('dir', dir)
+    console.log('offset[dir]', offset[dir])
+    console.log('this.internals.offset[dir]', this.internals.offset[dir])
     const state = this.state
     let index = state.index
     const diff = offset[dir] - this.internals.offset[dir]
