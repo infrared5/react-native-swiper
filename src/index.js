@@ -398,10 +398,9 @@ export default class extends Component {
     offset = offset || {}
     this.internals = this.internals || {}
     this.internals.offset = this.internals.offset || {}
-    const state = this.state
-    let index = state.index
+    let index = this.state.index
     const diff = (offset[dir] || 0) - (this.internals.offset[dir] || 0)
-    const step = dir === 'x' ? state.width : state.height
+    const step = dir === 'x' ? this.state.width : this.state.height
     let loopJump = false
 
     // Do nothing if offset no change.
@@ -414,10 +413,10 @@ export default class extends Component {
 
     if (this.props.loop) {
       if (index <= -1) {
-        index = state.total - 1
-        offset[dir] = step * state.total
+        index = this.state.total - 1
+        offset[dir] = step * this.state.total
         loopJump = true
-      } else if (index >= state.total) {
+      } else if (index >= this.state.total) {
         index = 0
         offset[dir] = step
         loopJump = true
